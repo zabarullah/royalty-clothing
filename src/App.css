@@ -2,3 +2,8 @@ body {
     font-family: 'Open Sans Condensed';
     padding: 20px 60px;
 }
+
+a{ /* The links on the header Navigation are styled here for the entire App so that there is no line underneath the link  */ 
+    text-decoration: none;
+    color: black;
+}
