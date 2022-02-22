@@ -32,7 +32,7 @@ class App extends React.Component {
               ...snapShot.data() /* Creates a new object currentUser with id from the snapShot.id and all the data from the rest of the snapShot, note the snapshot alone didn't show the id, so to get the id we had to invoke the .data() method on the snapShop */
             }
           });
-          console.log(this.state)
+          // console.log(this.state)  /* to log the current state of logged in user. */
           
         });
       } else {
