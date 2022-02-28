@@ -14,7 +14,7 @@ class SignUp extends React.Component {
             displayName: '',
             email: '',
             password: '',
-            confirmPassword: '' /* This are the items a user will be typing into the sign-up form, so we will set an initial state to empty string */
+            confirmPassword: '' /* These are the initial state(empty string) a user will eventually type into the sign-up form */
         }
     }
 
@@ -28,9 +28,9 @@ class SignUp extends React.Component {
         }
 
         try {
-            const{ user } = await auth.createUserWithEmailAndPassword(email, password)
+            const{ user } = await auth.createUserWithEmailAndPassword(email, password)  /* the firebase auth and method .createUserWithEmailAndPassword is used to create a new user with the email and password passed by the current state(i.e. when someone enters their credientials) */
 
-            await createUserProfileDocument(user, {displayName});
+            await createUserProfileDocument(user, {displayName}); /* Before we clear the form via setting the state to emtpry string, we must await for the createUserProfileDocument() to finish */
 
             this.setState({
                 displayName: '',
@@ -45,9 +45,9 @@ class SignUp extends React.Component {
     };
 
     handleChange = event => {
-        const { name, value } = event.target;
+        const { name, value } = event.target; /* When onChange function calls handleChange it will assign the event target to name of the field with the value from event.target */ 
 
-        this.setState({ [name]: value });
+        this.setState({ [name]: value }); /* When an OnChange event is triggered for any of the FormInput fields, Then the name of the changing field will dynamically populate here.  In example  if the email is entered then for the Email a value of the event.target will be assigned.*/
 
     };
 

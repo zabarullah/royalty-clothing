@@ -19,10 +19,10 @@ class App extends React.Component {
 
   unsubscribeFromAuth = null;
 
-  componentDidMount() {
-    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => { /* When a user signs in*/
-      if (userAuth) {                                                      /*  Check if userAuth exist, someone logged in*/
-        const userRef = await createUserProfileDocument(userAuth);         /* If there is a user signed in we will get back userRef from the method creatUserProfileDocument with userAuth passed into it( see firebase,utils.js file inside the createUserProfileDocument() function*/
+  componentDidMount() {                                                    /* The user authentication and later creating the user has to happen in the main app, so that the user profile can then be displayed later.*/
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async userAuth => { /* First read firebase.utils.js.   When a user signs in the variable unsubscribedFromAuth which was defaulted to null will be assigned the auth*/
+      if (userAuth) {                                                      /*  Check if userAuth exist, someone logged in */
+        const userRef = await createUserProfileDocument(userAuth);         /* If there is a user signed in we will get back userRef from the firebase method creatUserProfileDocument() with userAuth passed into it( see firebase,utils.js file inside the createUserProfileDocument() function */
 
         userRef.onSnapshot(snapShot => {
           // console.log(snapShot.data());

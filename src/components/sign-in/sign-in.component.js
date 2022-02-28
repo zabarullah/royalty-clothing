@@ -23,7 +23,7 @@ class SignIn extends React.Component{
         const { email, password } = this.state;
 
         try {
-            await auth.signInWithEmailAndPassword(email, password);
+            await auth.signInWithEmailAndPassword(email, password);  /* the firebase auth and method .signInWithEmailAndPassword is used to signin with the email and password passed by the  current state(i.e. when someone enters their credientials) */
 
         } catch(error) {
             console.log(error);
@@ -32,7 +32,7 @@ class SignIn extends React.Component{
     }
 
     handleChange = event => {
-        const { value, name } = event.target;    /* When onChange function calls handleChange it will assign the event target to Value and name */ 
+        const { value, name } = event.target;    /* When onChange function calls handleChange it will assign the event target to name of the field with the value from event.target */
         
         this.setState({ [name]: value }); /* When an OnChange event is triggered for Email field or Password, Then the name of the changing field will dynamically populate here.  So if the email is entered then for the Email a value of the event.target will be assigned.*/
 
@@ -54,7 +54,7 @@ class SignIn extends React.Component{
                     
                     <div className="buttons">
                         <CustomButton type="submit"> Sign In </CustomButton>
-                        <CustomButton onClick={signInWithGoogle} isGoogleSignIn> 
+                        <CustomButton type="button" onClick={signInWithGoogle} isGoogleSignIn> 
                          Sign In with Google 
                         </CustomButton>
                     </div>
