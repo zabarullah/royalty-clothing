@@ -32,9 +32,9 @@ class SignIn extends React.Component{
     }
 
     handleChange = event => {
-        const { value, name } = event.target;    /* When onChange function calls handleChange it will assign the event target to name of the field with the value from event.target */
+        const { value, name } = event.target;    /* When onChange function calls handleChange it pull the name and value from the event.target */
         
-        this.setState({ [name]: value }); /* When an OnChange event is triggered for Email field or Password, Then the name of the changing field will dynamically populate here.  So if the email is entered then for the Email a value of the event.target will be assigned.*/
+        this.setState({ [name]: value }); /* When an OnChange event is triggered for Email field or Password, Then the name of the changing field will dynamically populate here.  So if the email is entered then for the Email a value from the event.target (for the email) will be assigned.*/
 
     } 
 

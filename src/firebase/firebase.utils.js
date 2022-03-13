@@ -16,10 +16,10 @@ export const createUserProfileDocument = async (userAuth, additionalData) => {
   
   const userRef = firestore.doc(`users/${userAuth.uid}`); /* We query the firestore database in the users for the userid that matches the userAuth(the user that we signined in with) */
   
-  const snapShot = await userRef.get(); /* Once we get the userRef info from the firestore database (use await since we are awaiting for userRef) and assign it to a variable called snapshot so that we can use the data from the snapshot later*/
+  const snapShot = await userRef.get(); /* Once we get the userRef info from the firestore database (use await, since we are awaiting for userRef) and assign it to a variable called snapshot so that we can use the data from the snapshot later*/
   
   if(!snapShot.exists) {                      /* if a user(checked with snapShot.exists) doesn't exists, we do not have a snapshot(data) that exists for that user and thus, we will proceed to create the user into our database using our userRef. Eventually it will have its own snapshot later, and if the snap shot does exist, it will not create a duplicate of that user */
-    const { displayName, email } = userAuth; /* Note: below this point we are createing the snapshot for the new user.  From the userAuthentication data that we signed it with, we will assign from the userAuth to the variables displayName and email */
+    const { displayName, email } = userAuth; /* Note: below this point we are createing the snapshot for the new user.  From the userAuthentication data that we signed it with, we will grab from the userAuth to the variables displayName and email */
     const createdAt = new Date();
 
     try {
