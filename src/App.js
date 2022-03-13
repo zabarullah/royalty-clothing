@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route,Redirect } from 'react-router-dom';
 import { connect } from 'react-redux';  // Redux Step 8
 
 import HomePage from './pages/homepage/homepage.component';
@@ -45,7 +45,7 @@ class App extends React.Component {
       <Switch>
         <Route exact path='/' component={HomePage} />
         <Route path='/shop' component={ShopPage} />  
-        <Route path='/signin' component={SignInAndSignUpPage} />  
+        <Route exact path='/signin' render={() => this.props.currentUser ? (<Redirect to='/' />) : (<SignInAndSignUpPage />)} />  {/* if there is currentUser (someone signed in) then if you click signin link it will take you to the homepage not the signin page. otherwise take to the signup page(signin page)*/}
       </Switch>
     </div>
     );
@@ -53,9 +53,13 @@ class App extends React.Component {
   }
 }
 
-// Redux Step 8
-const mapDispatchToProps = dispatch => ({
-  setCurrentUser: user => dispatch(setCurrentUser(user)) /* Step 8 The action is dispatched to all the reducers. Now we can remove the this.state fom the constructor */
+const mapStateToProps = ({ user }) => ({
+  currentUser: user.currentUser                                             /* to give access to the this.props.currentUser for /signin route*/
 })
 
-export default connect(null,mapDispatchToProps)(App);  // Step 8 we passed in null since it does not need the current user outside of the header component as a prop(ie. app doesnt do anything with the currentUser beside setting it. i.e we dont need mapStateToProps here)mapDispatchToProps dispatches the action to the reducer.
+// Redux Step 8
+const mapDispatchToProps = dispatch => ({
+  setCurrentUser: user => dispatch(setCurrentUser(user))                    /* Step 8 The action is dispatched to all the reducers. Now we can remove the this.state fom the constructor */
+})
+
+export default connect(mapStateToProps,mapDispatchToProps)(App);            // Step 8 we passed in null since it does not need the current user outside of the header component as a prop(ie. app doesnt do anything with the currentUser beside setting it. i.e we dont need mapStateToProps here)mapDispatchToProps dispatches the action to the reducer.
